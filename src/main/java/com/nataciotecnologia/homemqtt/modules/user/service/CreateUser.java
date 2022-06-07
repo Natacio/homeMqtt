@@ -1,5 +1,6 @@
 package com.nataciotecnologia.homemqtt.modules.user.service;
 
+import com.nataciotecnologia.homemqtt.modules.user.UserDto.PostUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,14 @@ public class CreateUser {
     @Autowired
     private PasswordEncoder encoder;
 
-    public User execute(User user){
+    public User execute(PostUserDto user){
+
         User exists = userRepository.findByUsername(user.getUsername());
         if (exists != null){
             throw new Error("User exists");
         }
         user.setPassword(encoder.encode(user.getPassword()));
 
-        return userRepository.save(user);
+        return userRepository.save(user.convert());
     }
 }
