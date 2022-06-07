@@ -1,5 +1,6 @@
 package com.nataciotecnologia.homemqtt.modules.user.controller;
 
+import com.nataciotecnologia.homemqtt.modules.user.UserDto.GetUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.service.CreateUser;
 import com.nataciotecnologia.homemqtt.modules.user.service.GetAllUsers;
@@ -20,15 +21,17 @@ public class UserController {
     private CreateUser createUser;
 
     @GetMapping
-    public List<User> index (){
+    public List<GetUserDto> index (){
+
         return this.getAllUsers.execute();
     }
 
     @PostMapping
-    public ResponseEntity<User> created (@RequestBody User user){
-        System.out.println(user);
+    public ResponseEntity<GetUserDto> created (@RequestBody User user){
+
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.createUser.execute(user));
+            GetUserDto userDto = new GetUserDto(this.createUser.execute(user));
+            return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
