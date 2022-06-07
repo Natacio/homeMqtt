@@ -1,10 +1,10 @@
-package com.nataciotecnologia.homemqtt.modules.user.service;
+package com.nataciotecnologia.homemqtt.modules.user.services;
 
+import com.nataciotecnologia.homemqtt.modules.user.UserDto.GetUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.UserDto.PostUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class CreateUser {
     @Autowired
     private PasswordEncoder encoder;
 
-    public User execute(PostUserDto user){
+    public GetUserDto execute(PostUserDto user){
 
         User exists = userRepository.findByUsername(user.getUsername());
         if (exists != null){
@@ -23,6 +23,6 @@ public class CreateUser {
         }
         user.setPassword(encoder.encode(user.getPassword()));
 
-        return userRepository.save(user.convert());
+        return new GetUserDto(userRepository.save(user.convert()));
     }
 }
