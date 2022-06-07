@@ -1,11 +1,10 @@
-package com.nataciotecnologia.homemqtt.modules.user.service;
+package com.nataciotecnologia.homemqtt.modules.user.services;
 
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

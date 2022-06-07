@@ -2,16 +2,11 @@ package com.nataciotecnologia.homemqtt.modules.user.controller;
 
 import com.nataciotecnologia.homemqtt.modules.user.UserDto.GetUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.UserDto.PostUserDto;
-import com.nataciotecnologia.homemqtt.modules.user.model.User;
-import com.nataciotecnologia.homemqtt.modules.user.service.CreateUser;
-import com.nataciotecnologia.homemqtt.modules.user.service.DeleteUser;
-import com.nataciotecnologia.homemqtt.modules.user.service.GetAllUsers;
-import com.nataciotecnologia.homemqtt.modules.user.service.UpdateUser;
+import com.nataciotecnologia.homemqtt.modules.user.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +24,9 @@ public class UserController {
     private UpdateUser updateUser;
 
     @Autowired
+    private GetOneUser getOneUser;
+
+    @Autowired
     DeleteUser deleteUser;
 
     @GetMapping
@@ -41,10 +39,18 @@ public class UserController {
     public ResponseEntity<GetUserDto> created (@RequestBody @Valid PostUserDto user){
 
         try {
-            GetUserDto userDto = new GetUserDto(this.createUser.execute(user));
-            return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.createUser.execute(user));
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetUserDto> getOneUser(@PathVariable UUID id){
+        try {
+            return ResponseEntity.ok().body(this.getOneUser.execute(id));
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
         }
     }
 

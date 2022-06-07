@@ -1,4 +1,4 @@
-package com.nataciotecnologia.homemqtt.modules.user.service;
+package com.nataciotecnologia.homemqtt.modules.user.services;
 
 import com.nataciotecnologia.homemqtt.modules.user.UserDto.GetUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
