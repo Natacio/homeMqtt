@@ -4,6 +4,7 @@ import com.nataciotecnologia.homemqtt.modules.user.UserDto.GetUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.UserDto.PostUserDto;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.service.CreateUser;
+import com.nataciotecnologia.homemqtt.modules.user.service.DeleteUser;
 import com.nataciotecnologia.homemqtt.modules.user.service.GetAllUsers;
 import com.nataciotecnologia.homemqtt.modules.user.service.UpdateUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UpdateUser updateUser;
+
+    @Autowired
+    DeleteUser deleteUser;
 
     @GetMapping
     public List<GetUserDto> index (){
@@ -52,5 +56,10 @@ public class UserController {
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id){
+        this.deleteUser.execute(id);
     }
 }

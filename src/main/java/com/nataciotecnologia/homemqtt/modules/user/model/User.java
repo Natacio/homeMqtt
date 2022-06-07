@@ -1,5 +1,7 @@
 package com.nataciotecnologia.homemqtt.modules.user.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -9,6 +11,7 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, unique = true, nullable = false,columnDefinition = "BINARY(16)")
     private UUID id;
 
     @Column(nullable = false)
