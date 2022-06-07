@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<GetUserDto> created (@RequestBody  @Valid PostUserDto user){
+    public ResponseEntity<GetUserDto> created (@RequestBody PostUserDto user){
 
         try {
             GetUserDto userDto = new GetUserDto(this.createUser.execute(user));
