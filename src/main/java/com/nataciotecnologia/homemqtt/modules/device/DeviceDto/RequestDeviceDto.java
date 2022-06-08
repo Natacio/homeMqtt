@@ -1,10 +1,12 @@
 package com.nataciotecnologia.homemqtt.modules.device.DeviceDto;
 
-public class RequestDto {
+import java.util.UUID;
+
+public class RequestDeviceDto {
 
     private String sn;
     private String topic;
-    private String user_id;
+    private UUID user_id;
 
     public String getSn() {
         return sn;
@@ -22,11 +24,11 @@ public class RequestDto {
         this.topic = topic;
     }
 
-    public String getUser_id() {
+    public UUID getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(UUID user_id) {
         this.user_id = user_id;
     }
 }
