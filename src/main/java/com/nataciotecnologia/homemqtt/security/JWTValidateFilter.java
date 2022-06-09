@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class JWTValidateFilter extends BasicAuthenticationFilter {
     public static final String HEADER = "Authorization";
-    public static final String ATRIBUTE = "Bearer";
+    public static final String ATRIBUTE = "Bearer ";
 
     public JWTValidateFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
