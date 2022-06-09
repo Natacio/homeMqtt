@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class HomeMqttApplication {
 
     public static void main(String[] args) {
+        
         SpringApplication.run(HomeMqttApplication.class, args);
     }
 
