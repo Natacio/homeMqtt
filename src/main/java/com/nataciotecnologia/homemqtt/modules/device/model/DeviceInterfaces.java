@@ -1,5 +1,7 @@
 package com.nataciotecnologia.homemqtt.modules.device.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -9,15 +11,18 @@ public class DeviceInterfaces {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, unique = true, nullable = false,columnDefinition = "BINARY(16)")
+    @Column(name = "id", unique = true, nullable = false, columnDefinition = "BINARY(16)")
     private UUID id;
 
+    @Column(nullable = false,unique = true)
     private String sn;
 
+    @Column(nullable = false,unique = true)
     private String topic;
 
     @ManyToOne
     @JoinColumn(name = "device_id")
+    @JsonBackReference
     private DeviceModel device;
 
     public UUID getId() {

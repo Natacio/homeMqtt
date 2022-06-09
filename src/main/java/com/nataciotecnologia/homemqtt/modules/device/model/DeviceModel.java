@@ -1,8 +1,11 @@
 package com.nataciotecnologia.homemqtt.modules.device.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Table(name = "devices")
@@ -15,6 +18,14 @@ public class DeviceModel {
     private String sn;
 
     private String topic;
+
+    @OneToMany(mappedBy = "device")
+    @JsonManagedReference
+    private List<DeviceInterfaces> interfaces;
+
+    public List<DeviceInterfaces> getInterfaces() {
+        return this.interfaces;
+    }
 
     @ManyToOne
     @JoinColumn(name = "user_id")

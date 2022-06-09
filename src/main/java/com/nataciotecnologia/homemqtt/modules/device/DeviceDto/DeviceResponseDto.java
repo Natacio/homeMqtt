@@ -1,7 +1,11 @@
 package com.nataciotecnologia.homemqtt.modules.device.DeviceDto;
 
+import com.nataciotecnologia.homemqtt.modules.device.model.DeviceInterfaces;
 import com.nataciotecnologia.homemqtt.modules.device.model.DeviceModel;
 import com.nataciotecnologia.homemqtt.modules.user.UserDto.GetUserDto;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public class DeviceResponseDto {
@@ -10,6 +14,16 @@ public class DeviceResponseDto {
     private String sn;
 
     private String topic;
+
+    private List<DeviceInterfaces> interfaces;
+
+    public List<DeviceInterfaces> getInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(List<DeviceInterfaces> interfaces) {
+        this.interfaces = interfaces;
+    }
 
    // private GetUserDto user;
 
@@ -42,6 +56,7 @@ public class DeviceResponseDto {
         this.id = device.getId();
         this.sn = device.getSn();
         this.topic = device.getTopic();
+        this.interfaces = device.getInterfaces();
         //this.user = new GetUserDto(device.getUser());
     }
 }

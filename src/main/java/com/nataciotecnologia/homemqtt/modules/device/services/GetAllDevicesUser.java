@@ -5,6 +5,7 @@ import com.nataciotecnologia.homemqtt.modules.device.model.DeviceModel;
 import com.nataciotecnologia.homemqtt.modules.device.repositories.DeviceRepository;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.repository.UserRepository;
+import com.nataciotecnologia.homemqtt.modules.user.services.GetUserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,12 @@ public class GetAllDevicesUser {
     private DeviceRepository deviceRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    GetUserLogin getUserLogin;
 
-    public List<DeviceResponseDto> getAll(UUID id){
-        User user = this.userRepository.findById(id).get();
+    public List<DeviceResponseDto> getAll(){
 
-        List<DeviceModel> devices = this.deviceRepository.findByUserId(id);
+        List<DeviceModel> devices = this.deviceRepository.findByUserId(getUserLogin.execute().getId());
 
         List<DeviceResponseDto> deviceResponseDtoList = devices.stream().map(DeviceResponseDto::new).collect(Collectors.toList());
 
