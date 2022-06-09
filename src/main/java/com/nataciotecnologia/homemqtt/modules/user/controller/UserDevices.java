@@ -29,7 +29,7 @@ public class UserDevices {
 
     @GetMapping
     public List<DeviceResponseDto> index(){
-        User user = this.userRepository.findByUsername("keka");
+        User user = this.userRepository.findByUsername("keka").orElse(null);
         return getAllDevicesUser.getAll(user.getId());
     }
 
