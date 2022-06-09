@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CreateUser {
     @Autowired
@@ -17,8 +19,8 @@ public class CreateUser {
 
     public GetUserDto execute(PostUserDto user){
 
-        User exists = userRepository.findByUsername(user.getUsername());
-        if (exists != null){
+        Optional<User> exists = userRepository.findByUsername(user.getUsername());
+        if (!exists.isEmpty()){
             throw new Error("User exists");
         }
         user.setPassword(encoder.encode(user.getPassword()));
