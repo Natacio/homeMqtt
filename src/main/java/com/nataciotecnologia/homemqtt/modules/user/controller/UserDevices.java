@@ -4,18 +4,14 @@ import com.nataciotecnologia.homemqtt.modules.device.DeviceDto.DeviceRequestInte
 import com.nataciotecnologia.homemqtt.modules.device.DeviceDto.DeviceResponseDto;
 import com.nataciotecnologia.homemqtt.modules.device.DeviceDto.RequestDeviceDto;
 import com.nataciotecnologia.homemqtt.modules.device.model.DeviceInterfaces;
-import com.nataciotecnologia.homemqtt.modules.device.model.DeviceModel;
 import com.nataciotecnologia.homemqtt.modules.device.services.CreateDevice;
 import com.nataciotecnologia.homemqtt.modules.device.services.CreateDeviceInterface;
 import com.nataciotecnologia.homemqtt.modules.device.services.GetAllDevicesUser;
-import com.nataciotecnologia.homemqtt.modules.user.model.User;
 import com.nataciotecnologia.homemqtt.modules.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/user/devices")

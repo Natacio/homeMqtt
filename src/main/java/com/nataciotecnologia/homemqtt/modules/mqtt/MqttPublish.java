@@ -12,6 +12,8 @@ public class MqttPublish {
 
     private static int qos = 2;
     private static String broker = "tcp://localhost:1883";
+    private static String user = "natacio";
+    private static String password = "senhaforte2022";
     private static String clientId = "JavaSampleTeste";
     private static MemoryPersistence persistence = new MemoryPersistence();
 
@@ -52,6 +54,8 @@ public class MqttPublish {
         try {
             MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
+            connOpts.setUserName(user);
+            connOpts.setPassword(password.toCharArray());
             connOpts.setCleanSession(true);
             System.out.println("Connecting to broker: "+broker);
             sampleClient.connect(connOpts);
