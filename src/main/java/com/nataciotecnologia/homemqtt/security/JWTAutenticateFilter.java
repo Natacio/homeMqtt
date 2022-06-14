@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nataciotecnologia.homemqtt.data.UseDetailData;
 import com.nataciotecnologia.homemqtt.modules.user.model.User;
+import com.nataciotecnologia.homemqtt.modules.user.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,8 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 public class JWTAutenticateFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
@@ -39,9 +40,16 @@ public class JWTAutenticateFilter extends UsernamePasswordAuthenticationFilter {
         String token = JWT.create()
                 .withSubject(useDetailData.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION) )
+                .withIssuer(new ArrayList<>().toString())
                 .sign(Algorithm.HMAC512(SECRET));
-        response.getWriter().write(token);
-        response.getWriter().flush();
+
+        Map<String, String> res = new HashMap<>();
+
+        res.put("token",token);
+
+        response.setContentType("application/json");
+        new ObjectMapper().writeValue(response.getOutputStream(),res);
+
     }
 
     @Override
